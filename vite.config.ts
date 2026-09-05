@@ -12,9 +12,6 @@ export default defineConfig(({ command }) => ({
   },
   plugins: [
     tanstackStart({ server: { entry: "server" } }),
-    // Nitro's Vercel preset creates deployment artifacts during a production
-    // build, but it takes over Vite's request handler in development and
-    // returns 404 for the app routes. Let TanStack Start handle dev requests.
     ...(command === "build" ? [nitro({ preset: "vercel" })] : []),
     viteReact(),
     tailwindcss(),
