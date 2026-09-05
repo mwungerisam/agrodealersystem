@@ -5,8 +5,8 @@ import { createRouter } from "./router";
 import "./styles.css";
 
 const router = createRouter();
-
 const rootElement = document.getElementById("root");
+
 if (rootElement && !rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
