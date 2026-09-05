@@ -67,7 +67,7 @@ function withSecurityHeaders(response, request) {
 	});
 }
 async function getServerEntry() {
-	if (!serverEntryPromise) serverEntryPromise = import("./server-BmWXmX9I.mjs").then((n) => n.t).then((m) => m.default ?? m);
+	if (!serverEntryPromise) serverEntryPromise = import("./server-VJANJ1JK.mjs").then((n) => n.t).then((m) => m.default ?? m);
 	return serverEntryPromise;
 }
 async function normalizeCatastrophicSsrResponse(response) {

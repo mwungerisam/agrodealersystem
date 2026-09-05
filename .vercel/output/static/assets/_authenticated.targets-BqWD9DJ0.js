@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-dev-runtime-B7LvUism.js";import{ot as t}from"./index-UsNvQT7L.js";var n=e(),r=`/app/applet/src/routes/_authenticated.targets.tsx?tsr-split=component`;function i(){return(0,n.jsxDEV)(t,{to:`/dashboard`,replace:!0},void 0,!1,{fileName:r,lineNumber:4,columnNumber:10},this)}export{i as component};

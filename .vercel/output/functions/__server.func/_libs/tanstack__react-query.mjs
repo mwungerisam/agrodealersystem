@@ -1,6 +1,6 @@
 import { o as __toESM } from "../_runtime.mjs";
 import { u as require_react } from "./@floating-ui/react-dom+[...].mjs";
-import { P as require_jsx_runtime } from "./@radix-ui/react-alert-dialog+[...].mjs";
+import { M as require_jsx_runtime } from "./@radix-ui/react-alert-dialog+[...].mjs";
 import { a as noop, i as notifyManager, n as MutationObserver, o as shouldThrowError, r as QueryObserver } from "./tanstack__query-core.mjs";
 //#region node_modules/@tanstack/react-query/build/modern/QueryClientProvider.js
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
