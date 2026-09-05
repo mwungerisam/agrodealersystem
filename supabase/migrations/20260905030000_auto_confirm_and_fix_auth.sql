@@ -16,9 +16,6 @@ BEGIN
   IF NEW.email_confirmed_at IS NULL THEN
     NEW.email_confirmed_at := now();
   END IF;
-  IF NEW.confirmed_at IS NULL THEN
-    NEW.confirmed_at := now();
-  END IF;
   RETURN NEW;
 END;
 $$;
@@ -31,9 +28,8 @@ EXECUTE FUNCTION public.auto_confirm_new_users();
 
 -- 2. Retroactively confirm any existing unconfirmed users in auth.users
 UPDATE auth.users
-SET email_confirmed_at = COALESCE(email_confirmed_at, now()),
-    confirmed_at = COALESCE(confirmed_at, now())
-WHERE email_confirmed_at IS NULL OR confirmed_at IS NULL;
+SET email_confirmed_at = COALESCE(email_confirmed_at, now())
+WHERE email_confirmed_at IS NULL;
 
 -- 3. Ensure profiles and user_roles are created for all existing users
 INSERT INTO public.profiles (id, full_name, phone)
@@ -60,5 +56,4 @@ SELECT
     ELSE FALSE
   END
 FROM auth.users u
-ON CONFLICT (user_id) DO UPDATE
-SET role = EXCLUDED.role;
+ON CONFLICT (user_id) DO NOTHING;
