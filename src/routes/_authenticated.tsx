@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_authenticated")({
 });
 
 function AuthenticatedLayout() {
-  const { user, profile, role, businessName, loading, signOut } = useAuth();
+  const { user, role, loading, signOut } = useAuth();
   const isOwner = useIsOwner();
   const navigate = useNavigate();
   const location = useLocation();
@@ -54,6 +54,8 @@ function AuthenticatedLayout() {
     return null;
   }
 
+  const roleName = role?.role || "worker";
+
   const navItems = [
     { label: t.dashboard, to: "/dashboard", icon: LayoutDashboard, show: true },
     { label: t.sales, to: "/sales", icon: ShoppingCart, show: true },
@@ -63,7 +65,7 @@ function AuthenticatedLayout() {
     { label: t.expenses, to: "/expenses", icon: Receipt, show: true },
     { label: t.transfers, to: "/transfers", icon: ArrowLeftRight, show: true },
     { label: t.reports, to: "/reports", icon: BarChart3, show: true },
-    { label: t.branches, to: "/branches", icon: Building2, show: isOwner || role === "manager" },
+    { label: t.branches, to: "/branches", icon: Building2, show: isOwner || roleName === "manager" },
     { label: t.users, to: "/users", icon: Users, show: isOwner },
     { label: t.audit, to: "/audit", icon: ShieldAlert, show: isOwner },
     { label: t.account, to: "/account", icon: User, show: true },
@@ -79,10 +81,10 @@ function AuthenticatedLayout() {
           </div>
           <div className="min-w-0 flex-1">
             <h1 className="truncate text-sm font-bold tracking-tight text-foreground">
-              {businessName || "Agrodealer System"}
+              UFBC Agrodealer
             </h1>
             <p className="truncate text-xs text-muted-foreground capitalize">
-              {role ? `${role}` : "Portal"}
+              {roleName}
             </p>
           </div>
         </div>
@@ -113,11 +115,11 @@ function AuthenticatedLayout() {
         <div className="border-t p-4">
           <div className="mb-3 flex items-center gap-3 px-2">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">
-              {(profile?.full_name || user.email || "U")[0].toUpperCase()}
+              {(user.email || "U")[0].toUpperCase()}
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-xs font-semibold text-foreground">
-                {profile?.full_name || user.email?.split("@")[0]}
+                {user.email?.split("@")[0]}
               </p>
               <p className="truncate text-[10px] text-muted-foreground">{user.email}</p>
             </div>
@@ -141,7 +143,7 @@ function AuthenticatedLayout() {
             <Sprout className="h-4 w-4" />
           </div>
           <span className="font-bold text-sm truncate max-w-[180px]">
-            {businessName || "Agrodealer"}
+            UFBC Agrodealer
           </span>
         </div>
         <Button

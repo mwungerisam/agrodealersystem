@@ -649,7 +649,6 @@ function Dashboard() {
               <p className="mt-1 text-xs text-muted-foreground">Recent sales and customer records created by your team.</p>
             </div>
             <div className="flex items-center gap-3 text-xs font-semibold">
-              <Link to="/customers" className="text-primary hover:underline">Customers</Link>
               <Link to="/sales" className="text-primary hover:underline">Sales <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></Link>
             </div>
           </CardHeader>
