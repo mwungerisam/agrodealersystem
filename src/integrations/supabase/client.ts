@@ -16,7 +16,6 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
       new Headers(init.headers).forEach((value, key) => headers.set(key, value));
     }
 
-    // New Supabase API keys are opaque strings, not bearer JWTs.
     if (isNewSupabaseApiKey(supabaseKey) && headers.get('Authorization') === `Bearer ${supabaseKey}`) {
       headers.delete('Authorization');
     }
@@ -49,12 +48,6 @@ function createSupabaseClient() {
     metaEnv.VITE_SUPABASE_KEY ||
     procEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY ||
     '';
-
-  if (!SUPABASE_URL || !SUPABASE_KEY) {
-    console.warn(
-      '[Supabase] Supabase credentials not found in environment. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel.'
-    );
-  }
 
   const validUrl = SUPABASE_URL && SUPABASE_URL.startsWith('http') ? SUPABASE_URL : 'https://placeholder.supabase.co';
   const validKey = SUPABASE_KEY || 'placeholder-anon-key';
