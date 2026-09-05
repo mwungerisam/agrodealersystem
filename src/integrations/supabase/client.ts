@@ -27,8 +27,6 @@ function createSupabaseFetch(supabaseKey: string): typeof fetch {
 }
 
 function createSupabaseClient() {
-  // Use import.meta.env for client-side (Vite build-time replacement)
-  // Fall back to process.env for SSR / Serverless Functions
   const procEnv = typeof process !== 'undefined' && process.env ? process.env : {} as Record<string, string | undefined>;
   const metaEnv = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env : {} as Record<string, string | undefined>;
 
@@ -54,7 +52,7 @@ function createSupabaseClient() {
 
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     console.warn(
-      '[Supabase] Supabase URL or Anon/Publishable Key is not configured. Please ensure VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY are set in environment variables.'
+      '[Supabase] Supabase credentials not found in environment. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in Vercel.'
     );
   }
 
@@ -75,8 +73,6 @@ function createSupabaseClient() {
 
 let _supabase: ReturnType<typeof createSupabaseClient> | undefined;
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
 export const supabase = new Proxy({} as ReturnType<typeof createSupabaseClient>, {
   get(_, prop, receiver) {
     if (!_supabase) _supabase = createSupabaseClient();
